@@ -159,7 +159,7 @@ It defines what type of parameter it should send via OSC.
 - Go to character selection
 - Press `API Tokens` on top right
 - Use "all characters" or a specific character. At the moment the Checkboxe does not matter
-![docs/images/TokenConfig.png](docs/images/TokenConfig.png)
+![TokenConfig](docs/images/TokenConfig.png)
 - Click on `Create token`
 - ⚠️ Copy the Token. U wont be able to get it afterwards if u dont copy it
 
