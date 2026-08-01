@@ -2,7 +2,11 @@
 This software is used to get events from [saphiresocial.net](https://saphiresocial.net/) to then forwards them to VRchat via OSC.
 It will only get new notifications once.
 
-Its using C# and can be started as a small .exe to run in a termina.
+Its using C# and can be started as a small .exe to run in a terminal.
+
+## Showcase
+https://github.com/user-attachments/assets/1e486a63-656f-4d75-b57f-d71198cd7b46
+
 ## Table of Contents
 - [1 Disclaimer](#1-disclaimer)
 - [2 Configuration](#2-configuration)
