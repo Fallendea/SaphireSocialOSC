@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
@@ -70,6 +71,11 @@ internal class Program
         finally
         {
             Log.CloseAndFlush();
+            if (!Debugger.IsAttached)
+            {
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey(true);
+            }
         }
     }
 

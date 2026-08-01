@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>0.0.1-alpha</Version>
+        <Version>0.0.1</Version>
+        <AssemblyName>SaphireSocialOSC-$(Version)</AssemblyName>
+        <FileVersion>$(Version)</FileVersion>
         <OutputType>Exe</OutputType>
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
