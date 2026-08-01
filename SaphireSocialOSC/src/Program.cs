@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using SaphireSocialOSC.config;
 using Serilog;
 
@@ -10,6 +11,11 @@ internal class Program
 
     public static async Task Main(string[] args)
     {
+        var version = Assembly.GetExecutingAssembly()
+            .GetName()
+            .Version;
+        Console.Out.WriteLine($"Starting Saphire Social OSC in version {version}");
+
         var configuration = readConfig(args);
         configureLogger(configuration);
 
