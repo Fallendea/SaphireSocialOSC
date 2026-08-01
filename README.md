@@ -4,24 +4,24 @@ It will only get new notifications once.
 
 Its using C# and can be started as a small .exe to run in a termina.
 ## Table of Contents
-- [Disclaimer](#Disclaimer)
-- [Configuration](#Configuration)
-  - [IntervalInSeconds](#IntervalInSeconds)
-  - [RestConfig](#RestConfig)
-  - [OscClientConfig](#OscClientConfig)
-  - [EventMappingConfig](#EventMappingConfig)
-    - [Event Types](#event-types)
-    - [Default](#Default)
-    - [CharacterSpecificMapping](#CharacterSpecificMapping)
-    - [ParameterConfiguration](#ParameterConfiguration)
-- [How to get Token](#how-to-get-token)
-- [Create Exe](#create-exe)
+- [1 Disclaimer](#1-disclaimer)
+- [2 Configuration](#2-configuration)
+  - [2.1 IntervalInSeconds](#21-intervalinseconds)
+  - [2.2 RestConfig](#22-restconfig)
+  - [2.3 OscClientConfig](#23-oscclientconfig)
+  - [2.4 EventMappingConfig](#24-eventmappingconfig)
+    - [2.4.1 Event Types](#241-event-types)
+    - [2.4.2 Default](#242-default)
+    - [2.4.3 CharacterSpecificMapping](#243-characterspecificmapping)
+    - [2.4.4 ParameterConfiguration](#244-parameterconfiguration)
+- [3 How to get Token](#3-how-to-get-token)
+- [4 Create Exe](#4-create-exe)
 
-## Disclaimer
+## 1. Disclaimer
 While iam working as a software engineer, iam not used to work in C# or windows... or making .exe's. 
 There might be ways to do things better, lemme know if this is the case :)
 
-## Configuration
+## 2 Configuration
 Configuration is done in `appsettings.json`. By default this file will be written from the same directory as the .exe is.<br>
 But u can override this behavior with `--config <newPatch>` when starting the .exe.
 
@@ -30,7 +30,7 @@ See [How to get Token](#how-to-get-token)
 
 There are multiple Parts of the config that will be explained in the following sections.
 
-### IntervalInSeconds
+### 2.1 IntervalInSeconds
 Example
 ```json
 "IntervalInSeconds": 60,
@@ -38,7 +38,7 @@ Example
 This is the Interval in seconds the software is using to poll new Events from the API. The higher the value, the better the performance for u and the website itself is.
 The Website does not support faster polling interval than 10 seconds
 
-### RestConfig
+### 2.2 RestConfig
 Example
 ```json
 "RestConfig": {
@@ -51,7 +51,7 @@ Example
 - **Token**: Token from ur account, See [How to get Token](#how-to-get-token)
 - **TimeoutInSeconds**: Timeout for API requests in seconds
 
-### OscClientConfig
+### 2.3 OscClientConfig
 Example
 ```json
 "OscClientConfig": {
@@ -62,9 +62,9 @@ Example
 - Host: Host of the OSC server. By default VRChat opens it on local host.
 - Port: Port of OSC server. By default VRChat uses `9000`
 
-### EventMappingConfig
+### 2.4 EventMappingConfig
 Here we will configure what event from the API will become what event in OSC. First we have to check the possible event types
-#### Event Types
+#### 2.4.1 Event Types
 There are multiple event Types. U can find them in [saphiresocial](https://saphiresocial.net/developers) itself.<br>
 If the link is not working, here u can find them:
 - Go to character selection
@@ -83,7 +83,7 @@ thread.replied
 follower.new
 money.received
 ```
-#### Default
+#### 2.4.2 Default
 Example
 ```json
 "EventMappingConfig": {
@@ -113,7 +113,7 @@ The supplied [appsettings.json](appsettings.json) will set a boolean value based
 
 For more information how to configure each event type, see [ParameterConfiguration](#ParameterConfiguration)
 
-#### CharacterSpecificMapping
+#### 2.4.3 CharacterSpecificMapping
 
 ```json
 "EventMappingConfig": {
@@ -133,7 +133,7 @@ For an incoming event, it will first check if there is something configured for 
 
 For more information how to configure each event type, see [ParameterConfiguration](#ParameterConfiguration)
 
-#### ParameterConfiguration
+#### 2.4.4 ParameterConfiguration
 ```json
 "dm.received": {
   "Parameter": "saphireSocial/dm/received"
@@ -155,7 +155,7 @@ It defines what type of parameter it should send via OSC.
 - **Min**: Optional value, only required when using type `float`. Its used to calculate the % using `Clamp( (Count - Min) / (Max - Min), 0f, 1f)`
 - **Max**: Optional value, only required when using type `float`. Its used to calculate the % using `Clamp( (Count - Min) / (Max - Min), 0f, 1f)`
 
-## How to get Token
+## 3 How to get Token
 - Go to character selection
 - Press `API Tokens` on top right
 - Use "all characters" or a specific character. At the moment the Checkboxe does not matter
@@ -165,7 +165,7 @@ It defines what type of parameter it should send via OSC.
 
 ⚠️ Dont give ur Token to other People, While they cant access ur account with this, they can read ur messages/notifications⚠️ 
 
-## Create Exe
+## 4 Create Exe
 U might not trust my Exe and want to build it urself after checking my Code.
 In this case u can open the terminal in the [SaphireSocialOSC](SaphireSocialOSC) where the [SaphireSocialOSC/SaphireSocialOSC.csproj](SaphireSocialOSC/SaphireSocialOSC.csproj) is and run
 ```terminaloutput
