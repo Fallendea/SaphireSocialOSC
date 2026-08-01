@@ -1,0 +1,19 @@
+﻿# Build output
+**/bin/
+**/obj/
+
+# Rider
+.idea/
+.run/
+
+# User-specific files
+*.user
+*.suo
+*.DotSettings.user
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+appsettings-test.json
