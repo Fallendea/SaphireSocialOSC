@@ -7,7 +7,8 @@ namespace SaphireSocialOSC;
 
 internal class Program
 {
-    static readonly string DefaultConfigPath = "appsettings.json";
+    private const string DefaultConfigPath = "appsettings.json";
+    private const string ConfigPathPrefix = "--config";
 
     public static async Task Main(string[] args)
     {
@@ -67,7 +68,7 @@ internal class Program
         var configPath = DefaultConfigPath;
         for (var i = 0; i < args.Length - 1; i++)
         {
-            if (args[i] != "--config") continue;
+            if (args[i] != ConfigPathPrefix) continue;
             configPath = args[i + 1];
             Console.Out.WriteLine($"Config path overridden with {configPath}");
             break;

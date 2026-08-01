@@ -15,10 +15,12 @@ public class RestClient
     };
 
     private readonly HttpClient client;
-    private readonly string BaseUrl;
     private readonly string Token;
     private readonly int IntervalInSeconds;
     private readonly int TimeoutInSeconds;
+
+    private readonly string PathMe;
+    private readonly string PathEvents;
 
     private long? currentCursor = null;
 
@@ -27,7 +29,6 @@ public class RestClient
         if (string.IsNullOrWhiteSpace(config.Host)) throw new Exception("Rest Host is required");
         if (string.IsNullOrWhiteSpace(config.Token)) throw new Exception("Rest Token is required");
 
-        BaseUrl = config.Host.TrimEnd('/');
         Token = config.Token;
         IntervalInSeconds = Math.Max(10, config.IntervalInSeconds);
         TimeoutInSeconds = config.TimeoutInSeconds;
@@ -36,11 +37,15 @@ public class RestClient
             Timeout = TimeSpan.FromSeconds(TimeoutInSeconds)
         };
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+
+        var baseUrl = config.Host.TrimEnd('/');
+        PathMe = $"{baseUrl}/api/me";
+        PathEvents = $"{baseUrl}/api/events";
     }
 
     private async Task<MeResponseBody?> AsyncMeRequest()
     {
-        using var response = await client.GetAsync($"{BaseUrl}/api/me");
+        using var response = await client.GetAsync($"{PathMe}");
 
         response.EnsureSuccessStatusCode();
 
@@ -52,8 +57,8 @@ public class RestClient
     private async Task<EventResponseBody?> AsyncEventRequest()
     {
         using var response = currentCursor == null
-            ? await client.GetAsync($"{BaseUrl}/api/events")
-            : await client.GetAsync($"{BaseUrl}/api/events?after={currentCursor}");
+            ? await client.GetAsync($"{PathEvents}")
+            : await client.GetAsync($"{PathEvents}?after={currentCursor}");
 
         response.EnsureSuccessStatusCode();
 
@@ -64,7 +69,7 @@ public class RestClient
 
     public async Task RunAsync(CancellationToken cancellationToken = default)
     {
-        Log.Information("Getting Events from {BaseUrl} every {IntervalInSeconds}s", BaseUrl, IntervalInSeconds);
+        Log.Information("Getting Events from {url} every {IntervalInSeconds}s", PathEvents, IntervalInSeconds);
 
         await LogTokenInformation();
 
@@ -103,12 +108,14 @@ public class RestClient
         if (groupedEvents.Count == 0) return;
 
         Log.Information("Received {count} events:", eventResponseBody.Events.Count);
+
+        if (!Log.IsEnabled(Serilog.Events.LogEventLevel.Debug)) return;
         foreach (var (eventType, eventList) in groupedEvents)
         {
-            Log.Information("  {eventType}: {eventCount}", eventType, eventList.Count);
+            Log.Debug("  {eventType}: {eventCount}", eventType, eventList.Count);
         }
 
-        Log.Information(new string('-', 40));
+        Log.Debug(new string('-', 40));
     }
 
     private async Task LogTokenInformation()
