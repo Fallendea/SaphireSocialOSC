@@ -7,7 +7,11 @@ Its using C# and can be started as a small .exe to run in a terminal.
 ## Showcase
 https://github.com/user-attachments/assets/1e486a63-656f-4d75-b57f-d71198cd7b46
 
-The prefab used in this video can be found in [Unity folder](Unity)
+You can see me sending message to my other character and following it. <br>
+In Vrchat u see the corresponding toggle activating.
+You now could instead react to it in an Animator and to other stuff... do sounds.. whatever.
+
+The prefab used in this video can be found in [Unity folder](Unity).
 
 ## Table of Contents
 - [1 Disclaimer](#1-disclaimer)
