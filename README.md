@@ -3,11 +3,6 @@ This software is used to get events from [saphiresocial.net](https://saphiresoci
 It will only get new notifications once.
 
 Its using C# and can be started as a small .exe to run in a termina.
-
-<video controls>
-  <source src="docs/videos/Showcase.mp4" type="video/mp4">
-</video>
-
 ## Table of Contents
 - [1 Disclaimer](#1-disclaimer)
 - [2 Configuration](#2-configuration)
