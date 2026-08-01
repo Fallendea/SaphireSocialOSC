@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace SaphireSocialOSC.model;
@@ -11,7 +12,7 @@ public class EventResponseBody
 
 public class Event
 {
-    public EventType Type { get; set; }
+    public string Type { get; set; }
     public long Cursor { get; set; }
 
     public DateTimeOffset At { get; set; }
@@ -33,32 +34,4 @@ public class Event
 
     //Only there for money received event
     public float? Amount { get; set; } = null;
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum EventType
-{
-    [JsonStringEnumMemberName("dm.received")]
-    DmReceived,
-
-    [JsonStringEnumMemberName("post.liked")]
-    PostLiked,
-
-    [JsonStringEnumMemberName("post.commented")]
-    PostCommented,
-
-    [JsonStringEnumMemberName("comment.liked")]
-    CommentLiked,
-
-    [JsonStringEnumMemberName("comment.replied")]
-    CommentReplied,
-
-    [JsonStringEnumMemberName("thread.replied")]
-    ThreadReplied,
-
-    [JsonStringEnumMemberName("follower.new")]
-    FollowerNew,
-
-    [JsonStringEnumMemberName("money.received")]
-    MoneyReceived
 }

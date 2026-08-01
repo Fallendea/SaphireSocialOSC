@@ -1,9 +1,8 @@
-﻿using System.Net.Sockets;
-using BuildSoft.OscCore;
+﻿using BuildSoft.OscCore;
 using SaphireSocialOSC.config;
 using Serilog;
 
-namespace SaphireSocialOSC;
+namespace SaphireSocialOSC.service;
 
 public class OscClientWrapper
 {
